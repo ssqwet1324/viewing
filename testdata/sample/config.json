@@ -1,0 +1,20 @@
+{
+  "$schema": "../../docs/config.schema.json",
+  "title": "Синтетический пример",
+  "meshes": [
+    { "file": "bone.stl", "kind": "bone", "name": "Кость" },
+    { "file": "waxup.stl", "kind": "waxup", "name": "Wax-up", "visible": false },
+    { "file": "implant_15.stl", "kind": "implant", "name": "Имплант 15" },
+    { "file": "implant_12.stl", "kind": "implant", "name": "Имплант 12" },
+    { "file": "implant_22.stl", "kind": "implant", "name": "Имплант 22" },
+    { "file": "implant_25.stl", "kind": "implant", "name": "Имплант 25" },
+    { "file": "abutment_15.stl", "kind": "abutment", "name": "Абатмент 15" },
+    { "file": "abutment_12.stl", "kind": "abutment", "name": "Абатмент 12" },
+    { "file": "abutment_22.stl", "kind": "abutment", "name": "Абатмент 22" },
+    { "file": "abutment_25.stl", "kind": "abutment", "name": "Абатмент 25" },
+    { "file": "sleeve_15.stl", "kind": "sleeve", "name": "Втулка 15", "opacity": 0.9 },
+    { "file": "sleeve_12.stl", "kind": "sleeve", "name": "Втулка 12", "opacity": 0.9 },
+    { "file": "sleeve_22.stl", "kind": "sleeve", "name": "Втулка 22", "opacity": 0.9 },
+    { "file": "sleeve_25.stl", "kind": "sleeve", "name": "Втулка 25", "opacity": 0.9 }
+  ]
+}

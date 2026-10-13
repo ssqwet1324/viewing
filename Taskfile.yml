@@ -1,0 +1,56 @@
+version: "3"
+
+vars:
+  BIN: bin/dentview{{exeExt}}
+
+tasks:
+  default:
+    cmds: [task --list]
+
+  viewer:deps:
+    desc: npm ci для вьюера
+    dir: viewer
+    cmds: [npm ci]
+    sources: [package-lock.json]
+    status: [test -d node_modules]
+
+  viewer:
+    desc: Собрать вьюер → internal/htmlout/assets/viewer.js
+    deps: [viewer:deps]
+    dir: viewer
+    cmds:
+      - npx tsc --noEmit
+      - node build.mjs
+    sources: [src/**/*, build.mjs, package-lock.json, tsconfig.json]
+    generates: [../internal/htmlout/assets/viewer.js]
+
+  viewer:dev:
+    desc: Dev-сервер вьюера с синтетической сценой (http://localhost:5173)
+    deps: [viewer:deps]
+    dir: viewer
+    cmds: [node build.mjs --dev]
+
+  build:
+    desc: Собрать dentview
+    deps: [viewer]
+    cmds: [go build -trimpath -o {{.BIN}} ./cmd/dentview]
+
+  test:
+    desc: Go-тесты
+    cmds: [go test ./...]
+
+  check:
+    desc: vet + тесты + typecheck вьюера
+    cmds:
+      - go vet ./...
+      - go test ./...
+      - cd viewer && npx tsc --noEmit
+
+  sample:
+    desc: Пересоздать синтетические STL в testdata/sample
+    cmds: [go run ./tools/gensample]
+
+  demo:
+    desc: Собрать HTML из testdata/sample → bin/sample.html
+    deps: [build]
+    cmds: ["{{.BIN}} -c testdata/sample/config.json -o bin/sample.html"]
