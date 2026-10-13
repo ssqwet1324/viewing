@@ -41,3 +41,4 @@ testdata/private/**
 *.dcm
 
 .idea/
+.claude
